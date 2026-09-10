@@ -70,6 +70,8 @@
     "projects": {
         "subtitle": "﴾ Projects ﴿",
         "linkTitle": "Links",
+        "viewCaseStudy": "View case study",
+        "liveDemo": "Live Demo",
         "list": [
             {
                 "name": "Dar'Loca",

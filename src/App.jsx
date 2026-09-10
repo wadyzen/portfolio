@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Footer from "./components/Footer";
+import Footer from "./components/footer/Footer";
 import Hero from "./components/hero/Hero";
 import sun from "./assets/img/sun.svg";
 import moon from "./assets/img/moon.svg";
 import About from "./components/About";
-import Projects from "./components/Projects";
+import Projects from "./components/projects/Projects";
 import ProjectCaseStudy from "./components/ProjectCaseStudy";
+import Career from "./components/career/Career";
 import Contact from "./components/Contact";
-import Career from "./components/Career";
-import { useGoogleAnalytics } from "./analytics";
-import SmoothScroll from "./components/SmoothScroll";
-import PageLoader from "./components/PageLoader";
+import { useGoogleAnalytics } from "./hooks/analytics";
+import SmoothScroll from "./utils/SmoothScroll";
+import PageLoader from "./utils/PageLoader";
 
 function App() {
   useGoogleAnalytics();
@@ -47,7 +47,11 @@ function App() {
       <PageLoader isDarkMode={isDarkMode} />
 
       <SmoothScroll>
-        <button className="mode-toggle" onClick={handleToggle}>
+        <button
+          className="mode-toggle"
+          title={isDarkMode ? "Light mode" : "Dark mode"}
+          onClick={handleToggle}
+        >
           <div>
             <img
               src={currentIcon}

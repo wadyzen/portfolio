@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import star from "./../assets/img/star.svg";
+import star from "../../assets/img/star.svg";
 import NomadKnight from "./NomadKnight";
 import { useTranslation } from "react-i18next";
 
@@ -82,7 +82,6 @@ const Careers = () => {
     // Initial update
     updateActiveItems();
 
-    // Cleanup function
     return () => {
       if (scrollTriggerInstance) scrollTriggerInstance.kill();
       ScrollTrigger.getAll().forEach((trigger) => {

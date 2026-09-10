@@ -1,19 +1,22 @@
-import github from "../assets/img/github.svg";
-import linkIcon from "../assets/img/link.svg";
-import study from "../assets/img/school.svg";
-
-const linkIcons = {
-  github: { icon: github, label: "GitHub" },
-  live: { icon: linkIcon, label: "Live Demo" },
-  caseStudy: { icon: study, label: "Case Study" }, 
-};
+import { useTranslation } from "react-i18next";
+import github from "../../assets/img/github.svg";
+import linkIcon from "../../assets/img/link.svg";
+import study from "../../assets/img/school.svg";
 
 export default function ProjectLinks({ links }) {
-  if (links.text) return (
-    <>
-      <li>{links.text}</li>
-    </>
-  );
+  const { t } = useTranslation();
+  const linkIcons = {
+    github: { icon: github, label: "GitHub" },
+    live: { icon: linkIcon, label: t("projects.liveDemo") },
+    caseStudy: { icon: study, label: "Case Study" },
+  };
+
+  if (links.text)
+    return (
+      <>
+        <li>{links.text}</li>
+      </>
+    );
 
   return (
     <>
@@ -38,4 +41,3 @@ export default function ProjectLinks({ links }) {
     </>
   );
 }
-

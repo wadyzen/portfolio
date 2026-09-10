@@ -13,7 +13,7 @@
 
   <link rel="canonical" href="https://wadyzen.dev/" />
 
-  <link rel="icon" type="image/svg+xml" href="/sun.svg" />
+  <link rel="icon" type="image/svg+xml" href="/sun-2.svg" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,12 +32,152 @@
   <meta name="twitter:title" content="WadyZen | Web Developer">
   <meta name="twitter:description" content="Web developer crafting modern, fast, and scalable web solutions.">
   <meta name="twitter:image" content="https://wadyzen.dev/og-image.jpg">
+
+  <!-- Inline critical CSS for the loader so it paints immediately -->
+  <style>
+    /* Prevent scroll while loader is up */
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body.is-loading {
+      overflow: hidden;
+    }
+
+    #initial-loader {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-color, #f5efe6);
+      z-index: 9999;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    #initial-loader.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #initial-loader .loader-glow {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
+      opacity: 0.35;
+      animation: page-loader-pulse 1.8s ease-in-out infinite;
+      transition: 250ms;
+    }
+
+    #initial-loader .loader-icon {
+      position: relative;
+      z-index: 1;
+      width: 80px;
+      height: 80px;
+      will-change: transform;
+      animation: loader-spin 1.6s ease-in-out infinite;
+    }
+
+    @keyframes loader-spin {
+      0% {
+        transform: rotate(0deg) scale(0.8);
+
+      }
+
+      33% {
+        transform: rotate(120deg) scale(1.15);
+      }
+
+      66% {
+        transform: rotate(240deg) scale(0.8);
+      }
+
+      100% {
+        transform: rotate(360deg) scale(1.15);
+      }
+    }
+
+
+    @keyframes page-loader-pulse {
+
+      0%,
+      100% {
+        transform: scale(0.9);
+        opacity: 0.25;
+      }
+
+      50% {
+        transform: scale(1.15);
+        opacity: 0.45;
+      }
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+      #initial-loader .loader-icon {
+        animation: none !important;
+      }
+
+      #initial-loader .loader-glow {
+        animation: none;
+        opacity: 0.3;
+      }
+    }
+
+    /* Dark mode variant if user has it saved */
+    html.dark #initial-loader {
+      background: var(--bg-color, #201a12);
+    }
+  </style>
+
+  <!-- Apply saved theme BEFORE first paint to avoid flash -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("darkMode") === "true") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) { }
+    })();
+    // Note: body isn't parsed yet at this point, so add a fallback below.
+  </script>
 </head>
 
-
-<body>
+<body class="is-loading">
   <div id="root"></div>
+
+  <!-- The initial static loader — visible before React ever runs -->
+  <div id="initial-loader" aria-hidden="true">
+    <div class="loader-glow"></div>
+    <img id="initial-loader-icon" class="loader-icon" src="/sun-2.svg" alt="" />
+  </div>
+
+  <script>
+    // Pick the right icon based on stored theme (before React)
+    (function () {
+      try {
+        if (localStorage.getItem("darkMode") === "true") {
+          document.getElementById("initial-loader-icon").src = "/moon.svg";
+        }
+      } catch (e) { }
+    })();
+  </script>
+
   <script type="module" src="/src/main.jsx"></script>
+  <script>
+    setTimeout(function () {
+      document.body.classList.remove("is-loading");
+      var el = document.getElementById("initial-loader");
+      if (el) {
+        el.classList.add("is-hidden");
+        setTimeout(function () { el.remove(); }, 500);
+      }
+    }, 5000);
+  </script>
 </body>
 
 </html>

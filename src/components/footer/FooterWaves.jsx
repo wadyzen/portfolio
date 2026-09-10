@@ -1,5 +1,3 @@
-import React from "react";
-
 function WaveLayer({ id, path, className }) {
   return (
     <div className={`footer-wave-track ${className}`} id={id}>
@@ -20,11 +18,6 @@ function WaveLayer({ id, path, className }) {
     </div>
   );
 }
-
-// All three paths are built as a periodic wave: y(0) === y(900), and the
-// curve's incoming/outgoing tangent at x=0 matches the one at x=900. That's
-// what makes the two side-by-side copies read as one continuous wave rather
-// than two curves that happen to touch at the same height.
 
 // Baseline 80, amplitude 10, period 300 (3 repeats across the 900 width)
 const BACK_PATH =

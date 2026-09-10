@@ -1,8 +1,8 @@
 import { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef } from "react";
-import ProjectLinks from "./ProjectLinks";
-import { useProjects } from "./useProjects";
+import ProjectLinks from "./projects/ProjectLinks";
+import { useProjects } from "../hooks/useProjects";
 import React from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -17,20 +17,15 @@ function ProjectCaseStudy() {
   const rootRef = useRef(null);
 
   useEffect(() => {
-    // Reset scroll position with multiple methods for compatibility
     const resetScroll = () => {
-      // Method 1: Standard scroll
       window.scrollTo(0, 0);
 
-      // Method 2: For smooth scroll libraries
       if (typeof window.smoother !== "undefined") {
         window.smoother.scrollTop(0);
       }
 
-      // Method 3: GSAP ScrollTrigger
       ScrollTrigger.refresh();
 
-      // Method 4: Force scroll after a small delay
       setTimeout(() => {
         window.scrollTo(0, 0);
         if (typeof window.smoother !== "undefined") {
@@ -41,7 +36,6 @@ function ProjectCaseStudy() {
 
     resetScroll();
 
-    // Also reset when the route changes
     return () => {
       ScrollTrigger.refresh();
     };

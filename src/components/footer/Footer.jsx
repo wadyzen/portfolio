@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import lottie from "lottie-web";
-import animationData from "../assets/Walking_Nomads.json";
+import animationData from "../../assets/lotties/Walking_Nomads.json";
 import { useTranslation } from "react-i18next";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";

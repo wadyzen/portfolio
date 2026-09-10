@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import lottie from "lottie-web";
-import animationData from "../assets/NOMAD-TAIL-SWISH-ANIMATION.json";
+import animationData from "../../assets/lotties/NOMAD-TAIL-SWISH-ANIMATION.json";
 
 function NomadKnight() {
   const containerRef = useRef(null);

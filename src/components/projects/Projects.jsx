@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ProjectLinks from "./ProjectLinks";
 import { useTranslation } from "react-i18next";
-import SandDivider from "./SandDivider";
-import { useProjects } from "./useProjects";
+import SandDivider from "../../utils/SandDivider";
+import { useProjects } from "../../hooks/useProjects";
 
 function Projects() {
   const { t } = useTranslation();

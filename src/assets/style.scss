@@ -162,10 +162,6 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .page-loader-icon {
-        animation: none !important;
-    }
-
     .page-loader-glow {
         animation: none;
         opacity: 0.3;

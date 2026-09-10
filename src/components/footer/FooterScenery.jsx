@@ -1,5 +1,3 @@
-// One tile's worth of dune, duplicated exactly once → 2 copies = a seamless loop.
-// Direction is controlled by --scenery-dir (1 or -1), independent of animation speed.
 function DuneRow() {
   const dune = (
     <path d="M0 40 C 60 10, 140 10, 200 40 C 260 70, 340 70, 400 40 L 400 100 L 0 100 Z" />
@@ -16,7 +14,6 @@ function DuneRow() {
   );
 }
 
-// Faster-moving foreground layer.
 function PalmRow() {
   const palm = (
     <g>

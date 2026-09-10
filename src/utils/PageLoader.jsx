@@ -1,35 +1,20 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import sun from "../assets/img/sun.svg";
 import moon from "../assets/img/moon.svg";
 
 export default function PageLoader({ isDarkMode }) {
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
-  const isFirstRender = useRef(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const prefersReduced = useReducedMotion();
+  const lastPathRef = useRef(location.pathname);
 
-  // Initial page load — unchanged.
-  useEffect(() => {
-    const minDisplay = new Promise((resolve) => setTimeout(resolve, 500));
-    const pageLoaded =
-      document.readyState === "complete"
-        ? Promise.resolve()
-        : new Promise((resolve) =>
-            window.addEventListener("load", resolve, { once: true }),
-          );
-
-    Promise.all([minDisplay, pageLoaded]).then(() => setIsLoading(false));
-  }, []);
-
-  // Route changes: useLayoutEffect instead of useEffect so the loader
-  // mounts BEFORE the browser paints the new route's content — this is
-  // the fix for the "new page flashes, then loader appears" bug.
   useLayoutEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    // Only trigger when the pathname actually changes from the last one we saw.
+    if (lastPathRef.current === location.pathname) return;
+    lastPathRef.current = location.pathname;
+
     setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 700);
     return () => clearTimeout(timer);
@@ -62,11 +47,13 @@ export default function PageLoader({ isDarkMode }) {
             className="page-loader-icon"
             initial={{ rotate: -90, scale: 0.4, opacity: 0 }}
             animate={{
-              rotate: 360,
+              rotate: prefersReduced ? 0 : 360,
               scale: 1,
               opacity: 1,
               transition: {
-                rotate: { duration: 2.2, repeat: Infinity, ease: "linear" },
+                rotate: prefersReduced
+                  ? { duration: 0 }
+                  : { duration: 2.2, repeat: Infinity, ease: "linear" },
                 scale: { duration: 0.5, ease: "easeOut" },
                 opacity: { duration: 0.5, ease: "easeOut" },
               },
