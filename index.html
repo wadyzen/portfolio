@@ -33,9 +33,7 @@
   <meta name="twitter:description" content="Web developer crafting modern, fast, and scalable web solutions.">
   <meta name="twitter:image" content="https://wadyzen.dev/og-image.jpg">
 
-  <!-- Inline critical CSS for the loader so it paints immediately -->
   <style>
-    /* Prevent scroll while loader is up */
     html,
     body {
       margin: 0;
@@ -70,7 +68,6 @@
       background: radial-gradient(circle, var(--secondary-color) 0%, transparent 70%);
       opacity: 0.35;
       animation: page-loader-pulse 1.8s ease-in-out infinite;
-      transition: 250ms;
     }
 
     #initial-loader .loader-icon {
@@ -79,28 +76,34 @@
       width: 80px;
       height: 80px;
       will-change: transform;
-      animation: loader-spin 1.6s ease-in-out infinite;
+      opacity: 0;
+      transform: scale(0.4) rotate(-90deg);
+      animation:
+        loader-spin 2.2s linear infinite,
+        loader-enter 0.5s ease-out forwards;
     }
 
     @keyframes loader-spin {
-      0% {
-        transform: rotate(0deg) scale(0.8);
-
+      from {
+        transform: rotate(0deg);
       }
 
-      33% {
-        transform: rotate(120deg) scale(1.15);
-      }
-
-      66% {
-        transform: rotate(240deg) scale(0.8);
-      }
-
-      100% {
-        transform: rotate(360deg) scale(1.15);
+      to {
+        transform: rotate(360deg);
       }
     }
 
+    @keyframes loader-enter {
+      from {
+        opacity: 0;
+        transform: scale(0.4);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
     @keyframes page-loader-pulse {
 
@@ -116,10 +119,9 @@
       }
     }
 
-
     @media (prefers-reduced-motion: reduce) {
       #initial-loader .loader-icon {
-        animation: none !important;
+        animation: loader-enter 0.3s ease-out forwards;
       }
 
       #initial-loader .loader-glow {
@@ -128,13 +130,11 @@
       }
     }
 
-    /* Dark mode variant if user has it saved */
     html.dark #initial-loader {
       background: var(--bg-color, #201a12);
     }
   </style>
 
-  <!-- Apply saved theme BEFORE first paint to avoid flash -->
   <script>
     (function () {
       try {
@@ -143,21 +143,18 @@
         }
       } catch (e) { }
     })();
-    // Note: body isn't parsed yet at this point, so add a fallback below.
   </script>
 </head>
 
 <body class="is-loading">
   <div id="root"></div>
 
-  <!-- The initial static loader — visible before React ever runs -->
   <div id="initial-loader" aria-hidden="true">
     <div class="loader-glow"></div>
     <img id="initial-loader-icon" class="loader-icon" src="/sun-2.svg" alt="" />
   </div>
 
   <script>
-    // Pick the right icon based on stored theme (before React)
     (function () {
       try {
         if (localStorage.getItem("darkMode") === "true") {
