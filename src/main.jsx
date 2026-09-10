@@ -21,7 +21,6 @@ requestAnimationFrame(() => {
     htmlLoader.classList.add("is-hidden");
     document.body.classList.remove("is-loading");
 
-    // Remove from DOM after the fade-out finishes
     setTimeout(() => htmlLoader.remove(), 500);
   });
 });

@@ -165,16 +165,6 @@
   </script>
 
   <script type="module" src="/src/main.jsx"></script>
-  <script>
-    setTimeout(function () {
-      document.body.classList.remove("is-loading");
-      var el = document.getElementById("initial-loader");
-      if (el) {
-        el.classList.add("is-hidden");
-        setTimeout(function () { el.remove(); }, 500);
-      }
-    }, 5000);
-  </script>
 </body>
 
 </html>
