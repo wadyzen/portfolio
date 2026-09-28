@@ -63,7 +63,7 @@ function Contact() {
             </a>
 
             <a
-              href="https://github.com/WadieZN"
+              href="https://github.com/wadyzen"
               target="_blank"
               rel="noreferrer"
               className="link-circle"
