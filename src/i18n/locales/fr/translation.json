@@ -15,6 +15,9 @@
         "title": "Un développeur marocain",
         "description": "Je suis développeur web et j’aime créer des sites qui sont à la fois impressionnants visuellement et fluides à utiliser. Depuis que je me suis lancé dans cet univers, j’ai développé un œil attentif pour le design, une vraie passion pour le code propre et une obsession pour offrir la meilleure expérience possible aux utilisateurs. Qu’il s’agisse de développement front-end, de design UI/UX ou de branding digital, j’aime transformer des idées en sites soignés et entièrement fonctionnels. Pour moi, tout repose sur le mélange entre créativité et compétences techniques, afin que le résultat final ne soit pas seulement beau, mais aussi rapide, responsive et facile à utiliser."
     },
+     "navbar": {
+        "home": "Accueil"
+    },
     "common": {
         "backHome": "Retour à l'accueil"
     },

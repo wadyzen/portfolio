@@ -15,6 +15,9 @@
         "title": "A Moroccan Developer",
         "description": "I’m a web developer who loves building websites that look amazing and work smoothly. Since diving into this world, I’ve developed a sharp eye for design, a knack for clean code, and a real obsession with making sure users have the best experience possible. Whether it’s front-end development, UI/UX design, or digital branding, I get excited about turning ideas into polished, fully functional sites. For me, it’s all about mixing creativity with technical skill, so that the end result isn’t just beautiful, but also fast, responsive, and easy to use."
     },
+    "navbar": {
+        "home": "Home"
+    },
     "common": {
         "backHome": "Back to home"
     },
